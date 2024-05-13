@@ -50,13 +50,35 @@ router.post("/login", async (req, res) => {
     const decodePassword = await bcrypt.compare(password, user.password);
 
     if (decodePassword) {
-      return res.status(200).json({id:user.id, token: generateToken(user.id) });
+      return res
+        .status(200)
+        .json({ id: user.id, token: generateToken(user.id) });
     }
 
     return res.status(400).json("Authorization Failed");
   } catch (error) {
     return res.status(404).json({ error });
   }
+});
+
+router.get("/users", async (req, res) => {
+  const { name, phone } = req.query;
+
+  let users = await User.find({});
+
+  if (!users) {
+    return res.status("400").json("Users Not Found");
+  }
+
+  if (name && name !== "") {
+    users = users.filter((user) => user.name.includes(name));
+  }
+
+  if (phone && phone !== "") {
+    users = users.filter((user) => user.phone.includes(phone));
+  }
+
+  return res.json(users);
 });
 
 module.exports = router;

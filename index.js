@@ -6,7 +6,11 @@ const userRoutes = require("./routes/UserRoutes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/database");
-const { sendMessage, allMessages, allContacts } = require("./controllers/controllers");
+const {
+  sendMessage,
+  allMessages,
+  allContacts,
+} = require("./controllers/controllers");
 
 const app = express();
 
@@ -15,6 +19,7 @@ connectDB();
 app.get("/", (req, res) => {
   res.send("Chat App with Flutter & Node.js");
 });
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -47,14 +52,13 @@ io.on("connection", (socket) => {
   socket.on("setup", (user) => {
     socket.join(user);
     socket.emit("connected");
-    socket.emit("contacts",allContacts(user));
+    socket.emit("contacts", allContacts(user));
     console.log(`${user} setting-Up`);
   });
 
   socket.on("select user", (selectedUser) => {
     socket.join(selectedUser);
-    socket
-      .emit("all messages", allMessages(user, selectedUser));
+    socket.emit("all messages", allMessages(user, selectedUser));
     console.log(`${user} select ${selectedUser} for chat`);
 
     socket.on("new message", (newMessage) => {
