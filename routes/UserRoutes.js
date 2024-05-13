@@ -28,6 +28,7 @@ router.post("/signup", async (req, res) => {
       name,
       phone,
       password: hashpassword,
+      gender: "male",
     }).save();
 
     return res.status(200).json("Account Created Successfully");
