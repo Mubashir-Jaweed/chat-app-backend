@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/users", async (req, res) => {
-  const { name, phone } = req.query;
+  let { name, phone, gender } = req.query;
 
   let users = await User.find({});
 
@@ -71,11 +71,22 @@ router.get("/users", async (req, res) => {
   }
 
   if (name && name !== "") {
-    users = users.filter((user) => user.name.includes(name));
+    users = users.filter((user) =>
+      user.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
+    );
   }
 
   if (phone && phone !== "") {
-    users = users.filter((user) => user.phone.includes(phone));
+    users = users.filter((user) =>
+      user.phone.toLocaleLowerCase().includes(phone.toLocaleLowerCase())
+    );
+  }
+
+  gender = gender?.toLocaleLowerCase();
+  if (gender && gender !== "") {
+    users = users.filter(
+      (user) => user.gender.toLocaleLowerCase() === gender.toLocaleLowerCase()
+    );
   }
 
   return res.json(users);
