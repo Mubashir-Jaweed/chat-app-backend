@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     notification: Array,
     gender: {
       type: String,
-      
+      default: "male",
     },
   },
   {
