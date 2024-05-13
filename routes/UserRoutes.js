@@ -10,7 +10,7 @@ const generateToken = (id) => {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { name, phone, password } = req.body;
+    const { name, phone, password ,gender } = req.body;
 
     if (!name || !phone || !password) {
       return res.status(404).json("Not Found");
@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
       name,
       phone,
       password: hashpassword,
-      gender: "male",
+      gender: gender,
     }).save();
 
     return res.status(200).json("Account Created Successfully");
