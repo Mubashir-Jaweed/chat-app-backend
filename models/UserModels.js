@@ -7,10 +7,6 @@ const userSchema = new mongoose.Schema(
     password: String,
     contacts: Array,
     notification: Array,
-    gender: {
-      type: String,
-      default: "male",
-    },
   },
   {
     timeStamps: true,
