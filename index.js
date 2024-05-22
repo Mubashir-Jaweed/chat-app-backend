@@ -17,7 +17,7 @@ const app = express();
 connectDB();
 
 app.get("/", (req, res) => {
-  res.send("Chat App with Flutter & Node.js");
+  res.send(allContacts(user));
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
