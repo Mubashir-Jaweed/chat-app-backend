@@ -17,7 +17,7 @@ const app = express();
 connectDB();
 
 app.get("/", (req, res) => {
-  res.send(allContacts(user));
+  res.send("Chat App with Flutter & Node.js");
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
   socket.on("setup", (user) => {
     socket.join(user);
     socket.emit("connected");
-    socket.emit("contacts", allContacts(user));
+    socket.emit("contacts", allContacts(664225851388e64d8cc0fe80));
     console.log(`${user} setting-Up`);
   });
 
