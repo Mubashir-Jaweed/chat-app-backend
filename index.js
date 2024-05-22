@@ -48,10 +48,10 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("Connected to Socket.io");
 
-  socket.on("setup", (user) => {
+  socket.on("setup", async (user) => {
     socket.join(user);
     socket.emit("connected");
-    socket.emit("contacts", `${allContacts(user)} listening ..................`);
+    socket.emit("contacts",await allContacts(user));
     console.log(`${user} setting-Up`);
   });
 
