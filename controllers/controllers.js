@@ -40,7 +40,7 @@ module.exports.allContacts = async (id) => {
       return console.log("Not Found");
     }
     const contacts = await User.findById(id);
-    return `${id} from backend`
+    return contacts.contacts;
   } catch (error) {
     console.log({ error: error });
   }
