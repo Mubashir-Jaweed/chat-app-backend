@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
   socket.on("setup", (user) => {
     socket.join(user);
     socket.emit("connected");
-    socket.emit("contacts", allContacts(664225851388e64d8cc0fe80));
+    socket.emit("contacts", allContacts(user));
     console.log(`${user} setting-Up`);
   });
 
